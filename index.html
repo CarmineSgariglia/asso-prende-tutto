@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Asso Prende Tutto</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="scores">
+    <div class="score-chip">
+      <span class="dot cpu" aria-hidden="true"></span>
+      <b>CPU prese:</b> <span id="cpuScore">0</span>
+    </div>
+    <div class="score-chip">
+      <span class="dot player" aria-hidden="true"></span>
+      <b>Giocatore prese:</b> <span id="playerScore">0</span>
+    </div>
+  </div>
+
+  <div id="game">
+    <div id="cpu" class="hand" aria-label="Mano CPU"></div>
+    <div id="tableArea" class="table" aria-label="Carte sul tavolo"></div>
+    <div id="player" class="hand" aria-label="Tua mano"></div>
+    <div id="statusWrap">
+      <div id="status">
+        <span class="pulse" aria-hidden="true"></span>
+        <span id="statusText">Tocca a te</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup">
+    <div id="popupContent">
+      <h2 id="winnerText"></h2>
+      <button onclick="resetGame()">Nuova partita</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
