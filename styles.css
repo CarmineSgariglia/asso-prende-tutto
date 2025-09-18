@@ -149,6 +149,17 @@ body::before{
 .spade{ color: var(--spade); }
 .bastoni{ color: var(--bastoni); }
 
+/* === COPERTURA CARTE CPU (solo grafica) === */
+.card.cpu.covered > *{ opacity:0; } /* nasconde numero e seme */
+.card.cpu.covered::before{
+  content:"";
+  position:absolute; inset:0; border-radius:inherit;
+  background:
+    radial-gradient(120% 120% at 20% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
+    repeating-linear-gradient(45deg, #e2e6f3 0 10px, #c5cbe0 10px 20px);
+  z-index:2;
+}
+
 /* Indicatori di turno */
 .hand{
   border-radius:16px;
@@ -160,14 +171,14 @@ body::before{
   transform: scale(1.01);
 }
 
-/* Scoreboard glass */
+/* Scoreboard + toolbar glass */
 #scores{
   position:absolute; inset:12px 12px auto 12px;
   display:flex; gap:12px; justify-content:space-between; align-items:center;
   z-index:2;
   pointer-events:none;
 }
-.score-chip{
+.score-chip, .toolbar{
   pointer-events:auto;
   display:flex; align-items:center; gap:10px;
   padding:10px 14px;

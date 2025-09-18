@@ -11,6 +11,9 @@ let deck=[], table=[], playerHand=[], cpuHand=[];
 let playerPile=[], cpuPile=[];
 let turn="player", lastCapture=null;
 
+/* nuovo: stato copertura CPU (grafica) */
+let hideCPU=false;
+
 function createDeck(){
   const d=[];
   for(const s of suits){
@@ -43,6 +46,7 @@ function render(){
   cpuHand.forEach((c)=>{
     const d=renderCard(c);
     d.classList.add("cpu");
+    if(hideCPU) d.classList.add("covered");   // <— copertura grafica
     d.setAttribute("aria-hidden","true");
     cpuEl.appendChild(d);
   });
@@ -65,6 +69,8 @@ function render(){
   playerEl.classList.toggle("active", turn==="player");
 
   document.getElementById("statusText").innerText=(turn==="player"?"Tocca a te":"Turno CPU");
+
+  syncToggleButton();
 }
 
 function faceName(v){
@@ -181,4 +187,21 @@ function resetGame(){
   document.getElementById("popup").style.display="none";
   render();
 }
+
+/* === Toggle copertura CPU (solo UI) === */
+function toggleCpu(){
+  hideCPU = !hideCPU;
+  render();
+}
+function syncToggleButton(){
+  const btn = document.getElementById("toggleCpuBtn");
+  if(!btn) return;
+  btn.setAttribute("aria-pressed", hideCPU ? "true" : "false");
+  btn.textContent = hideCPU ? "Scopri carte CPU" : "Copri carte CPU";
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("toggleCpuBtn");
+  if(btn) btn.addEventListener("click", toggleCpu);
+});
+
 resetGame();
